@@ -1,0 +1,64 @@
+---
+layout: layouts/level-play.pug
+---
+
+style.
+    @import url("/assets/fonts/font-includer.css");
+    @import url("/assets/styles/level-kokervisie.css");
+
+
+.kokervisie-background
+    #kokervisie
+        .brand-title
+            h1= brand_title
+            h2= brand_subtitle
+        #carrousel
+            //- Arrow left
+            button(onclick="kokervisie.previousItem()" title="previous item")
+                img(src="/assets/images/levels/arrow-box-right.svg")
+            // FURNITURE ITEMS
+            for item, index in furniture
+                .item-container(id= index==0?'active':'')
+                    .item(style=`background-image: url(/assets/images/levels/photos/${item.image})`)
+                        .title
+                            h3= item.title
+                            p= item.subtitle
+                        button.button.open-button(onclick=`kokervisie.openPage(${index})`)= button_text_next
+                        button.button.close-button(onclick=`kokervisie.closePage(${index})`)= button_text_back
+                        //- furniture specific page
+                    .content
+                        h1= order_text
+                        //- all options for this furniture
+                        for option in item.options
+                            .option
+                                p= option.label
+                                .choices
+                                    //- selectable choices
+                                    for choice in option.choices
+                                        button(onclick=`kokervisie.selectOption(this, '${option.label}', '${choice.label}')`).choice
+                                            //- show color circle if has color attribute
+                                            if choice.color
+                                                .color-circle(style='background-color: '+choice.color)
+                                            p= choice.label
+
+                        button(onclick="kokervisie.checkOptions()").confirm-button= order_confirm_text
+            //- Arrow Right
+            button(onclick="kokervisie.nextItem()" title="next item")
+                img(src="/assets/images/levels/arrow-box-right.svg").right
+        #dots
+            for item,index in furniture
+                div(class='dot ' + (index==0?'active':''))
+    //- element that contains correct answer, read by script
+    #correct-options.hidden(aria-hidden='true')= JSON.stringify(correct_options)
+
+    // POPUP
+    #popup.active
+        .content
+            h2= popup_title
+            p= popup_text
+            button.button(onclick="kokervisie.closePopUp()")= popup_button_text
+
+
+
+// Script
+script(data-src="/assets/js/level-kokervisie.js" type="text/javascript" data-load-script)

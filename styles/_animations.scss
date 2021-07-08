@@ -1,0 +1,112 @@
+// Page Transitions scss file
+// for Accessibility Game
+// author: Bas de Bruin
+
+// MAIN fade in and out
+
+main {
+    transition: opacity .5s;
+    opacity: 1;
+}
+html.is-animating main {
+    opacity: 0;
+}
+
+
+// play header
+header {
+    transition: transform 0.7s;
+    transform: none;
+}
+html.is-animating header {
+    transform: translateY(-100%);
+}
+
+
+// fade naar links en naar rechts
+//  omhoog en naar beneden op mobiel
+.animate-left {
+    transition: transform .5s;
+    transform: none;
+}
+html.is-animating .animate-left {
+    transform: translateX(-50%);
+
+    @media (max-width: $breakSmall) {
+        transform: translateY(-50%);
+    }
+}
+
+.animate-right {
+    transition: transform .5s;
+    transform: none;
+}
+html.is-animating .animate-right {
+    transform: translateX(50%);
+
+    @media (max-width: $breakSmall) {
+        transform: translateY(50%);
+    }
+}
+
+// Turn off animations for people that want reduced motion
+@media (prefers-reduced-motion) {
+    body * {
+        transition: none;
+    }
+}
+
+
+// Score at level outro
+.score-columns * {
+    transform: none;
+    transform-origin: bottom left;
+    transition: all 1s;
+
+    &:nth-child(2) { transition: all 1.5s; }
+    &:nth-child(3) { transition: all 2s; }
+    &:nth-child(4) { transition: all 2.5s; }
+}
+
+#score.is-animating .score-columns * {
+    transform: scale(0);
+}
+
+progress::-moz-progress-bar {
+    transform: none;
+    transform-origin: left;
+    transition: transform 1.5s;
+}
+
+progress::-webkit-progress-value {
+    transform: none;
+    transform-origin: left;
+    transition: transform 1.5s;
+}
+
+#score.is-animating progress::-webkit-progress-value {
+    transform: scaleX(0);
+}
+
+#score.is-animating progress::-moz-progress-bar {
+    transform: scaleX(0);
+}
+
+.score-label {
+    opacity: 1;
+
+    transition: all 1.5s;
+}
+#score.is-animating .score-label {
+    opacity: 0;
+}
+
+#score {
+    opacity: 1;
+    transform: none;
+    transition: all .6s ease-out;
+}
+#score.is-animating {
+    opacity: 0;
+    transform: translateY(40%);
+}

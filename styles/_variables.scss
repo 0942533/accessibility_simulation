@@ -1,0 +1,27 @@
+// VARIABLES
+// for Accessibility Game
+
+// colors
+$background: #fff;
+$color:      #101228;
+$accent:     #2B4FEB;
+$light-accent: rgba($accent, .1);
+$accent2:    #21CEA0;
+$accent3:    #FF7D00;
+
+// font
+$fontFamily:         'Nunito', 'Muli', -apple-system, sans-serif;
+$fontFamilyHeadings: $fontFamily;
+$fontSize:           18px;
+$fontSizeMedium:     1rem;
+$fontSizeLarge:      1.2rem;
+$fontSizeTitle:      2.5rem;
+
+// breakpoints
+$breakSmall: 50rem;
+$containerSize: 35rem;
+$breakLarge: 80rem;
+
+// padding
+$padding: 1.3rem;
+$topPadding: 10rem;  // Space before Accessibility Game logo

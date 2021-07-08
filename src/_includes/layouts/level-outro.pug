@@ -1,0 +1,23 @@
+doctype html
+html(lang=lang?lang:'nl')
+    include _includes/layouts/head.pug
+    include _includes/mixins/level-mixins.pug
+    body
+        main#swup.container.large.padding
+            .columns
+                .level-image.animate-left
+                    img(src=image alt=`Illustratie over ${title}`)
+                .level-container.animate-right
+                    h1= title
+
+                    .spacer
+
+                    article
+                        | !{content}
+
+                    .spacer
+
+                    if collections.levels[index]
+                        a(href=`/levels/${index+1}/intro/`).button Volgend level
+                    else
+                        a(href=`/einde/`).button Ga verder

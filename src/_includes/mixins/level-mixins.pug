@@ -1,0 +1,49 @@
+//- Reusable components used in levels, intro's and outro's
+
+mixin level-bar(currentIndex)
+    - currentIndex--
+    - var nLevels = collections.levels.length
+    #level-bar-gradient
+    #level-bar(style=`margin-left: ${((nLevels/2) - (currentIndex+1)) * 4}rem`)
+        each level, i in collections.levels
+            if i < currentIndex
+                a(href=level.url title=`Ga naar het ${level.data.title} level`).level-number= i+1
+                .level-dash
+            else if i == currentIndex
+                .level-icon
+                    img(src=level.data.icon alt=`Icoon voor het ${level.data.title} level.`)
+            else if i > currentIndex
+                .level-dash
+                a(href=level.url title=`Ga naar het ${level.data.title} level`).level-number= i+1
+
+        
+
+
+
+mixin level-score(score)
+    - var starValues = [100, 200, 300]
+    - var maxScore = 400
+    #score-background
+        #score.is-animating
+            #score-title
+                h2= level_score_fail
+                h2= level_score_win
+            #score-subtitle
+                h4= level_score_bad
+                h4= level_score_good
+                h4= level_score_perfect
+
+            .score-columns
+                each i in starValues
+                    .star
+                        img(src='/assets/images/levels/icon_star_blue.svg' alt='Ster #'+i)
+                        p= i
+            
+            // Label for accessibility:
+            label#process-label.hidden(for="process")
+            progress(id="process" min="0" max=maxScore value=score)
+            h3#score-label score
+
+            .container.buttons
+                button(onclick="reloadPage()").button.light.back= level_score_retry ? level_score_retry : 'Probeer Opnieuw'
+                button(onclick="loadNextPage()").button#score-next-button= level_score_next ? level_score_next : 'Ga verder'

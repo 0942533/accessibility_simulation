@@ -1,0 +1,720 @@
+// MAIN scss file
+// for Accessibility Game
+// author: Bas de Bruin
+
+@import 'variables';
+@import 'head';
+@import 'animations';
+
+// containers
+.container {
+    display: block;
+    width: 100%;
+    margin: 0 auto;
+    max-width: $containerSize;
+    padding: 0 $padding;
+}
+
+.center {
+    text-align: center;
+}
+
+.container.large {
+    max-width: $breakLarge;
+}
+
+.container.buttons {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-between;
+
+    width: 100%;
+}
+
+.columns {
+    display: block;
+
+    @media (min-width: $breakSmall){
+        display: flex;
+        flex-flow: row nowrap;
+
+        > * {
+            margin: 0 $padding*0.5;
+            width: 100%;
+
+            &:first-child {
+                margin-left: 0;
+            }
+
+            &:last-child {
+                margin-right: 0;
+            }
+        }
+    }
+}
+
+.padding {
+    padding: $padding;
+}
+
+.spacer {
+    display: block;
+    height: $padding;
+    width: 100%;
+}
+
+
+p a:not(.button) {
+    color: $accent;
+    font-weight: bold;
+    display: inline;
+
+    border-bottom: solid 2px $light-accent;
+
+    transition: all .15s;
+    &:hover {
+        border-bottom-color: $accent;
+    }
+}
+
+
+
+// BUTTONS
+.button {
+    display: inline-block;
+
+    margin: 0.5rem 0 0 0;
+    font-size: 1rem;
+
+    width: auto;
+
+    padding: 0.5rem 1.2rem;
+
+    color: $background;
+    background: $accent;
+
+    border-radius: 2rem;
+
+    &::after {
+        display: inline-block;
+        content: url('/assets/images/arrow_right_white.svg');
+        margin-left: 0.6rem;
+        transform: translateY(0.22rem);
+    }
+
+
+    transition: all .15s;
+    &:hover {
+        transform: scale(1.03);
+    }
+    &:active {
+        transform: scale(0.97);
+    }
+
+    // light button
+    &.light {
+        color: $accent;
+        background: $light-accent;
+
+        &::after {
+            content: url('/assets/images/arrow_right_blue.svg');
+        }
+    }
+
+    // back button
+    &.back {
+        display: inline-flex;
+        flex-flow: row-reverse nowrap;
+        align-items: center;
+        justify-content: center;
+
+        &::after {
+            margin: 0 0.5rem 0 0;
+            transform: rotate(180deg) translateY(0.22rem);
+        }
+    }
+}
+
+
+
+// HOME PAGE
+.logo-title {
+    display: block;
+    margin-top: $topPadding;
+    margin-bottom: $padding * 2;
+
+    img {
+        width: auto;
+        margin: 0 auto;
+    }
+}
+.background-images {
+    width: 100%;
+
+    pointer-events: none;
+
+    img {
+        width: auto;
+        height: auto;
+
+        position: absolute;
+        z-index: -999;
+
+        width: calc(20% + 5rem);
+    }
+
+    img:nth-child(3), img:nth-child(4), img:nth-child(5) {
+        width: auto;
+    }
+
+    img:nth-child(1) { left:  0;    top: 15vw }
+    img:nth-child(2) { right: -1vw; top: 22vw }
+    img:nth-child(3) { right: 15vw; top: 5vw;   transform: rotate(-31deg) }
+    img:nth-child(4) { left:  10vw; top: 32rem; transform: rotate(20deg); }
+    img:nth-child(5) { right: 6vw;  top: 40rem; transform: rotate(-15deg); }
+
+    @media (max-width: $breakSmall) {
+        opacity: .4;
+    }
+}
+
+
+// LEVEL INTRO AND OUTRO
+
+.level-image {
+    width: 100%;
+    
+    background: $light-accent;
+    border-radius: 1rem;
+
+    @media (min-width: $breakSmall){
+        height: calc(100vh - #{$padding * 2});
+
+        img {
+            object-fit: contain;
+
+            width: 100%;
+            height: 100%;
+        }
+
+        position: fixed;
+        top: $padding;
+        left: $padding;
+        width: 50%;
+    }
+}
+
+.level-container {
+
+    h3 {
+        display:none;
+    }
+    @extend .container;
+
+    position: relative;
+
+    display: flex;
+    flex-flow: column nowrap;
+
+    width: 100%;
+    max-width: $breakSmall;
+
+    padding: $padding*2 0;
+
+    justify-content: center;
+    align-items: center;
+
+    @media (min-width: $breakSmall) {
+
+        margin-left: calc(50% + #{$padding*2});
+        min-height:calc(100vh - #{$padding*2});
+
+        padding: $padding*2 $padding;
+
+        overflow-x: hidden;
+
+    }
+}
+
+// List
+p ul, article ul {
+    margin: 1rem 0;
+
+    li {
+        display: flex;
+        flex-flow: row nowrap;
+        margin: 1rem 0;
+
+        background: rgba($accent2, .2);
+        border-radius: 1rem;
+        padding: 0.5rem 0.9rem;
+
+        //font-size: 1.1rem;
+
+        &::before {
+            content: '\2192'; // →
+
+            font-size: 1.1rem;
+
+            display: block;
+            color: $accent2;
+            margin-right: 1rem;
+        }
+    }
+}
+
+// Blockquote
+p blockquote, article blockquote {
+    display: flex;
+    flex-flow: row nowrap;
+
+    margin: 1rem 0;
+    padding: 0.5rem 0.9rem;
+
+    p { margin: 0; padding: 0; }
+
+    border-radius: 1rem;
+    background: rgba($accent3, .1);
+
+    &::before {
+        content: '\00BB'; // »
+
+        font-size: 1.7rem;
+        font-weight: normal;
+
+        display: block;
+        color: $accent3;
+        margin-right: 1rem;
+    }
+}
+
+#level-bar-gradient {
+    display: block;
+    width: calc(100% + #{$padding*2});
+    height: 6rem;
+    margin-bottom: -6rem;
+    background: linear-gradient(to right, #fff 0%, #fff0 20%, #fff0 80%, #fff 100%);
+    z-index: 999;
+    pointer-events: none;
+}
+
+#level-bar {
+    display: flex;
+    flex-flow: row nowrap;
+
+    align-items: center;
+    justify-content: center;
+    transform: translateX(6%);
+
+    min-width: 100%;
+    margin: $padding auto;
+
+    @media (max-width: $breakSmall) {
+        transform: translateX(-15%) !important;
+    }
+}
+.level-icon {
+    width: 4rem;
+    height: 4rem;
+    padding: 0.2rem;
+    background: $light-accent;
+    border-radius: 0.7rem;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    img {
+        width: 100%;
+    }
+}
+.level-number {
+    width: 3rem;
+    height: 3rem;
+
+    padding: 0.5rem;
+    padding-top: 0.65rem;
+
+    border-radius: 1.5rem;
+
+    text-align: center;
+    font-size: $fontSizeLarge;
+
+    background: $light-accent;
+    color: $accent;
+
+    transition: all .15s;
+
+    &:hover {
+        transform: scale(1.1);
+    }
+
+    &:active {
+        transform: scale(0.9);
+    }
+}
+.level-dash {
+    display: block;
+
+    width: 1.5rem;
+    height: 3px;
+    margin: auto 0.5rem;
+    
+    border-radius: 2px;
+
+    background: $light-accent;
+}
+
+// PLAYING A LEVEL
+
+header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 999;
+
+    display: flex;
+    flex-flow: row nowrap;
+    width: 100%;
+    padding: 0.4rem;
+    margin: 0;
+
+    align-items: center;
+    justify-content: center;
+
+    background: $background;
+
+    box-shadow: 0px 3px $light-accent;
+
+    .button {
+        position: absolute;
+        left: 1rem;
+        top: 0.45rem;
+    }
+
+    #logo {
+        display: flex;
+        flex-flow: row nowrap;
+        align-items: center;
+        justify-content: center;
+
+
+        img {
+            width: 3rem;
+            height: auto;
+            margin-left: 1rem;
+        }
+
+        @media (max-width: $breakSmall*0.7) {
+            *:not(img) {
+                display: none;
+            }
+        }
+    }
+
+    @media screen and (max-width: $breakSmall) {
+        justify-content: flex-end;
+        padding-right: $padding;
+    }
+}
+
+
+#skip-level {
+    @extend .button;
+    @extend .light;
+    background: rgba($background, .6);
+
+    position: fixed;
+    bottom: $padding;
+    right: $padding;
+
+    padding: 0.5rem 0.7rem;
+
+    box-shadow: 0px 5px 10px rgba($accent, 0.2);
+
+    z-index: 1000;
+    &::after { margin: 0; padding: 0;}
+}
+
+
+// STAR SCORE
+
+#score {
+
+    display: block;
+    width: 100%;
+    max-width: $containerSize;
+
+    border: solid 2px rgba($color, .1);
+    border-radius: 1rem;
+
+    background: $background;
+
+    padding: $padding*2 $padding;
+    padding-bottom: $padding;
+    margin: 0;
+    margin-bottom: $padding;
+
+    text-align: center;
+
+    #score-title * {
+        display: none;
+    }
+    h2 {
+        color: $accent;
+        font-size: 2rem;
+    }
+    #score-subtitle * {
+        display: none;
+        font-weight: bold;
+        margin-bottom: $padding;
+    }
+
+    .score-columns {
+        display: flex;
+        flex-flow: row nowrap;
+
+        width: 100%;
+        max-width: $containerSize * 0.65;
+
+        margin: $padding*0.5 auto;
+
+        justify-content: space-around;
+        align-items: baseline;
+
+        .star {
+            display: flex;
+            flex-flow: column nowrap;
+            align-items: center;
+
+            color: $accent;
+
+            width: 100%;
+            margin: 0 $padding;
+
+            width: 3rem;
+            opacity: .5;
+
+            &:nth-child(2) { width: 4rem; opacity: .7 }
+            &:nth-child(3) { width: 5rem; opacity: .9 }
+            &:nth-child(4) { width: 6rem; opacity: 1 }
+        }
+
+        
+
+        &:last-of-type {
+            margin-bottom: $padding;
+        }
+    }
+
+    progress {
+        width: 100%;
+        height: 0.6rem;
+
+        margin: 0;
+
+        appearance: none;
+
+        &::-webkit-progress-bar {
+            border-radius: 0.3rem;
+            background: $light-accent;
+        }
+        &::-webkit-progress-value {
+            border-radius: 0.3rem;
+            background: $accent;
+        }
+        &::-moz-progress-bar {
+            border-radius: 0.3rem;
+            background: $accent;
+        }
+    }
+
+    #score-label {
+        margin: 0;
+        margin-bottom: $padding;
+
+        font-weight: bold;
+        text-align: left;
+
+        transform: translateX(-1rem);
+    }
+
+}
+
+#score-background {
+    position: fixed;
+    top: 0;
+    left: 0;
+
+    width: 100%;
+    height: 100vh;
+
+    display: none; // flex
+    align-items: center;
+    justify-content: center;
+
+    background: rgba($accent, 0.7);
+
+    z-index: 900;
+}
+
+
+// Level index
+
+// level select element
+
+.level-list {
+    display: flex;
+    flex-flow: row nowrap;
+    align-items: center;
+    
+    width: 100%;
+
+    margin: 0.3rem 0;
+    padding: 0.3rem;
+
+    border-radius: 1rem;
+
+    .level-icon {
+        margin-right: $padding;
+    }
+
+    h3, h4 {
+        font-weight: bold;
+        margin-right: 0.5rem;
+    }
+
+    transition: all .15s;
+    &:hover {
+        background: $light-accent;
+
+        transform: scale(1.02);
+    }
+    &:active {
+        transform: scale(0.98);
+    }
+}
+
+
+// Level form styles
+label {
+    display: block;
+    color: $accent;
+
+    &.incorrect { color: $accent3 }
+}
+input[type=field], select {
+    display: block;
+    width: 100%;
+    box-sizing: border-box !important;
+    border-radius: 0.5rem;
+    border: solid 2px rgba($accent, 0);
+
+    appearance: none;
+    background: $light-accent;
+
+    padding: 0.3rem 0.6rem;
+    margin-bottom: 1rem;
+
+    transition: all .2s;
+
+    &:focus {
+        outline: none;
+        border: solid 2px $accent;
+    }
+
+    &.incorrect {
+        border-color: $accent3;
+        background: rgba($accent3, .1);
+    }
+}
+.select-wrapper {
+    position: relative;
+    display: block;
+    width: 100%;
+    &::before {
+        content: '\25BC'; // down arrow
+        color: $accent;
+        //font-weight: bold;
+
+        position: absolute;
+        top: 0.45rem;
+        right: 1rem;
+
+        pointer-events: none;
+
+        &.incorrect {
+            color: $accent3;
+        }
+    }
+}
+
+$red: #F83939;
+// ADHD popup
+#popup {
+    position: fixed;
+    top: 0;
+    left: 0;
+
+    display: none;
+    &.active {
+        display: flex;
+    }
+    flex-flow: column nowrap;
+    align-items: center;
+    justify-content: center;
+    justify-items: center;
+
+    width: 100vw;
+    height: 100vh;
+
+    padding: 1rem;
+
+    background: rgba($red, .9);
+
+    text-align: center;
+
+    z-index: 950;
+
+    .content {
+        display: block;
+        width: 100%;
+        max-width: 40rem;
+
+        background: $color;
+        color: $background;
+
+        padding: 2rem;
+
+        border-radius: 1rem;
+        box-shadow: 0px 20px 40px rgba($color, .1);
+
+        #time {
+            color: $red;
+            font-size: 2rem;
+            font-weight: bold;
+
+            animation: pulse .4s infinite;
+        }
+
+        button.secondary {
+            background: none;
+            color: $red;
+
+            margin-right: 2rem;
+
+            animation: pulse .5s infinite;
+        }
+
+        button.primary {
+            @extend .button;
+            background: darken($accent2, 10);
+
+            font-weight: bold;
+        }
+    }
+}
+
+.kokervisie-background #popup {
+    background: rgba($accent, .6);
+}

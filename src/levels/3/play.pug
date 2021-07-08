@@ -1,0 +1,73 @@
+---
+
+layout: levels/level-blind.pug
+index: 3
+title: Blind
+
+# gesproken tekst
+page1_intro_text: Druk op tab om te starten en luister goed naar wat de voorleessoftware je verteld.
+page1_submit_text: Incorrect. Doordat de afbeeldingen geen label hebben is het onmogelijk om deze vraag te beantwoorden. We gaan door naar de volgende pagina.
+
+page2_submit_text: Formulier correct ingevuld
+page2_submit_incorrect_text: Vul alle invoervelden in.
+page2_clear_text: Alle invoervelden zijn gewist
+
+# score popup tekst en knoppen
+level_score_win: Level behaald!
+level_score_fail: Level gefaald...
+level_score_bad: Helaas, probeer het nog een keer.
+level_score_good: Goed gedaan, maar probeer het nog sneller te doen!
+level_score_perfect: Perfect! Heel goed.
+
+level_score_retry: Probeer opnieuw
+level_score_next: Ga verder
+
+---
+
+// Pagina 1: geen alt tekst
+
+#page1.active
+    h1 Kop: Captcha
+    
+    p Bewijs dat je geen robot bent om verder te gaan.
+    p Hoeveel stoplichten zie je in de onderstaande afbeelding?
+
+    p Afbeelding
+    p Afbeelding
+    p Afbeelding
+    p Afbeelding
+
+    input(type="field" title="Invoerveld: Hoeveelheid" id="page1--discription")
+
+    p(data-confirm="blind.page2.init()") Knop: Verzenden
+
+// Pagina 2: slechte labels
+
+#page2
+    h1 Kop: Contactformulier
+
+    p Vul je contactgegevens in om verder te gaan!
+
+    p Hoe zullen we je noemen?  
+    p Naam
+    input(type="field" title="Invoerveld")  
+
+    p Waar kunnen we je bereiken?
+    p Mail
+    input(type="field" title="Invoerveld")
+
+    p Wil je nieuwsbrieven en reclamemails ontvangen?   
+    
+    p(data-confirm="blind.page2.setRadio(true)") Keuzerondje
+    p(data-confirm="blind.page2.setRadio(false)") Keuzerondje
+
+    p Ja graag!
+    p Nee
+
+    p(data-confirm="blind.page2.confirm()") Knop
+    p(data-confirm="blind.page2.clearForm()") Knop
+
+// Pagina 3: einde
+
+#page3
+    p(data-confirm="blind.page3.confirm()") Knop: Verzenden

@@ -1,0 +1,59 @@
+---
+layout: layouts/level-play.pug
+---
+
+// Style
+style.
+    #blind-background {
+        position: fixed;
+        top: 4.5rem; left: 0;
+
+        background: #101228;
+        color: white;
+
+        width: 100%;
+        min-height: 100vh;
+    }
+
+    #blind-background #content > * {
+        display: none;
+    }
+
+    #blind-background #content > *.active {
+        display: block;
+    }
+
+    #blind-background #overlay {
+        position: fixed;
+        top: 4.5rem; left: 0;
+        width: 100vw;
+        height: calc(100vh - 4.5rem);
+
+        display: flex;
+        align-content: center; justify-content: center;
+    }
+    #blind-background #overlay img {
+        width: auto; height: auto;
+        object-fit: contain;
+    }
+
+
+// Content
+#blind-background
+    #content.container.hidden
+        | !{content}
+
+    #overlay(aria-hidden="true")
+        img(src="/assets/images/levels/blind-overlay.svg")
+    
+//- Info elements, read by javascript to be spoken
+#blind-info(style="display: none")
+    #page1_intro_text=  page1_intro_text
+    #page1_submit_text= page1_submit_text
+    #page2_intro_text=  page2_intro_text
+    #page2_submit_text= page2_submit_text
+    #page2_clear_text=  page2_clear_text
+    #page2_submit_incorrect_text= page2_submit_incorrect_text
+
+// Script
+script(data-src="/assets/js/level-blind.js" type="text/javascript" data-load-script)

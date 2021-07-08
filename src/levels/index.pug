@@ -1,0 +1,18 @@
+---
+layout: layouts/page.pug
+title: Level select
+---
+
+.container.center
+    .logo-title
+        h1 Level select
+    
+    each level in collections.levels
+        a(href=level.url title=level.data.title).level-list
+            .level-icon
+                img(src=level.data.icon alt=`Icoon voor ${level.data.title} level.`)
+            h4= level.data.title
+
+    .spacer
+
+    a(href="https://accessibility-training-final.netlify.app/simulationOverview" rel="prev" title="Ga terug naar home").button.back Ga terug
